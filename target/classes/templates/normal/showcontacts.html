@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org"  th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title> </title>
+</head>
+<body>
+	
+	<section>
+	
+	
+	<div class="card ml-3  mr-3" >
+	<div class="container text-center ">
+         <div th:if="${session.message}" th:classappend="'alert '+${session.message.type}"   role="alert">
+         <p th:text="${session.message.content}">	</p>
+         
+       </div>
+         </div>
+	
+	<div class="card-body">
+	
+	<h1 class="text-center"> Your Contacts</h1>
+	
+	<!-- search block -->
+	
+	<div class="search-container">
+	
+	<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="search your contact" /> 
+	
+	<div  class="search-result">
+	<p> this is search result</p>
+	</div>
+	</div>
+	
+	
+	<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Number</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr th:each="c :${contacts}">
+  
+      <th scope="row" th:text="'SCM'+${c.cId}" ></th>
+      <td> 
+      <img class="my_profile_picture"  th:src="@{'/images/'+${c.image}}" alt="" />
+      <a  th:href="@{'/user/'+${c.cId}+'/contact'}" >
+       <span th:text="${c.name}"></span>
+       </a>
+       </td>
+      <td th:text="${c.email}"> </td>
+      <td th:text="${c.phone}"> </td>
+      <td>
+      <a  th:href="@{'/user/delete/'+${c.cId}}"  class="btn btn-danger btn-sm">DELETE</a>
+        <a  th:href="@{'/user/update/'+${c.cId}}"  class="btn btn-primary btn-sm">UPDATE</a>
+       </td>
+       
+    </tr>
+ 
+  </tbody>
+</table>
+	
+	
+	
+	
+	
+	
+	
+	</div>
+	</div>
+	
+	
+	</section>
+</body>
+</html>

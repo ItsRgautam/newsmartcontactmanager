@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org"  th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+	
+	<section>
+	<br />
+	
+	<h1> Update Contact</h1>
+	<br />
+	 <div class="container text-center ">
+         <div th:if="${session.message}" th:classappend="'alert '+${session.message.type}"   role="alert">
+         <p th:text="${session.message.content}">	</p>
+   
+         </div>
+        </div> 
+
+  <form  th:action="@{/user/updatecontactprocess}"  
+          method="POST"  
+          enctype="multipart/form-data"
+          th:object="${contact}">
+  
+  
+  
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col">
+    <input type="hidden"  th:value="${contact.cId}" name="cId" />
+   
+      <div class="form-outline">
+        <input th:value="${contact.name}" name="name" type="text" id="form6Example1" class="form-control"  placeholder="Enter Name " required />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+      
+        <input th:value="${contact.secondName}"  name="secondName" type="text" id="form6Example2" class="form-control" placeholder="Enter Nickname" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+  
+    <input th:value="${contact.work}"  name="work" type="text" id="form6Example3" class="form-control" placeholder="Enter Work" />
+  </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+  
+    <input th:value="${contact.email}"  name="email" type="email" id="form6Example5" class="form-control"  placeholder="Enter Email" required/>
+  </div>
+
+  <!-- Number input -->
+  <div class="form-outline mb-4">
+  
+    <input th:value="${contact.phone}"  name="phone" type="text" id="form6Example6" class="form-control" placeholder="Enter Phone Number" required/>
+  </div>
+
+  <!-- Message input -->
+  <div class="form-outline mb-4">
+  
+    <textarea th:text="${contact.description}"  name="description" class="form-control" id="form6Example7" rows="4" placeholder="Enter Additional information "></textarea>
+  </div>
+
+  <input type="hidden"  th:value="${contact.image}" name="image" />
+   <div class="custom-file">
+    <img class="" style="height:70px; width:70px;"  th:src="@{'/images/'+${contact.image}}" alt="" />
+    <br />
+    <label for=""> Choose new image</label>
+   <input type="file" name="profileimage"  />
+   </div>
+
+ <div class="container text-center">
+         <button  type="submit" class="btn bg-primary text-white"> Update Contact </button>
+         
+        
+                
+        </div>
+ 
+</form>
+	
+	
+	
+	</section>
+</body>
+</html>

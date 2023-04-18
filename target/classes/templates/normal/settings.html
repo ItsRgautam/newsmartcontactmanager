@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org"  th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+	
+	<section>
+	<h1  class="text-center"> Settings</h1>
+	
+	<h3> Change Password</h3>
+	<br />
+	 <div class="container text-center ">
+         <div th:if="${session.message}" th:classappend="'alert '+${session.message.type}"   role="alert">
+         <p th:text="${session.message.content}">	</p>
+   
+         </div>
+        </div>
+	
+	<div style="width:40%;" class="form-outline">
+	
+	<form th:action="@{/user/changepass}" method="post" > 
+	
+	<label for="oldpass">Current Password</label>
+	<input name="oldpassword" type="text" class="form-control" required />
+	<br />
+		<label for="newpass">New Password</label>
+	<input name="newpassword" type="text" class="form-control"  required/>
+	<br />
+	<div class="container text-center">
+         <button  type="submit" class="btn bg-primary text-white"> Save Contact </button>
+         
+        
+                
+        </div>
+	</form>
+	
+	</div>
+	
+	</section>
+</body>
+</html>
